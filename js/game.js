@@ -21,7 +21,7 @@ function init() {
 function createCell() {
     return {
         minesAroundCount: null,
-        isShown: true,
+        isShown: false,
         isMine: false,
         isMarked: true,
     };
@@ -67,13 +67,28 @@ function renderBoard(board) {
 }
 
 // Count mines around each cell and set the cell's minesAroundCount.
-function setMinesNegsCount(board) {}
+function setMinesNegsCount(board, rowIdx, colIdx) {
+    var count = 0;
+    for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
+        if (i < 0 || i > board.length - 1) continue;
+        for (var j = colIdx - 1; j <= colIdx + 1; j++) {
+            if (j < 0 || j > board[0].length - 1) continue;
+            if (i === rowIdx && j === colIdx) continue;
+            if (board[i][j] === bomb) count++;
+        }
+    }
+    return count;
+}
 
 //Called when a cell (td) is clicked
 function cellClicked(elCell, i, j) {
     console.log(i);
     console.log(j);
-    console.log(elcell);
+    // console.log(elcell);
+    console.log('gBoard[i][j]', gBoard[i][j]);
+    gBoard[i][j].isShown = true;
+
+    console.log('gBoard[i][j]', gBoard[i][j]);
 }
 
 //Called on right click to mark a cell (suspected to be a mine) Search
@@ -91,17 +106,3 @@ function checkGameOver() {}
 // BONUS: if you have the time later, try to work more like the
 // real algorithm (see description at the Bonuses section below)
 function expandShown(board, elCell, i, j) {}
-
-// function countMinesAround(board, rowIdx, colIdx) {
-//     var count = 0;
-//     for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
-//         if (i < 0 || i > board.length - 1) continue;
-//         for (var j = colIdx - 1; j <= colIdx + 1; j++) {
-//             if (j < 0 || j > board[0].length - 1) continue;
-//             if (i === rowIdx && j === colIdx) continue;
-//             var currCell = board[i][j];
-//             if (currCell === '$') count++;
-//         }
-//     }
-//     return count;
-// }
