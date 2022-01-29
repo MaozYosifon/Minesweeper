@@ -6,9 +6,3 @@
 .board-container {
     margin-top: 20px;
 }
-
-.cell {
-    background-color: rgb(202, 198, 198);
-    height: 30px;
-    width: 30px;
-}
